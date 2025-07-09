@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../App.css';
 
 
@@ -6,6 +6,14 @@ import '../App.css';
 const LowestCi = () => {    
 
     const [isHovered, setIsHovered] = useState(false);
+    const [info, setInfo] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:3003/api/golfstat/lowest/sofia')
+        .then(res => res.json())
+        .then(data => setInfo(data))
+        .catch(err => console.error(err));
+    },[]);
+    
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -49,7 +57,7 @@ const LowestCi = () => {
             }}
         >
             <div style={{width:"100%", fontSize: 16, fontWeight:"600", color:"#15192D"}}>
-                65
+                {info.lowest}
             </div>
          </div>
       </div>

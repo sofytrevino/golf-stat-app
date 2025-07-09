@@ -14,10 +14,16 @@ const pool = new Pool({
    port: 5432,
 });
 
-app.get('/api/courses', async (req, res) => {
+app.get('/api/courses/:name', async (req, res) => {
+    const {name} = req.params;
     try{
-        const result = await pool.query("SELECT * From courses")
-        res.json(result.rows);
+        const result = await pool.query(
+            `SELECT * 
+            From courses
+            WHERE course_name ILIKE $1`,
+            [name]
+        );
+        res.json(result.rows[0]);
     } catch(err){
         console.error(err);
         res.status(500).send('Database error');
@@ -162,7 +168,74 @@ app.get('/api/golfstat/hazard/:name', async (req, res) => {
         res.status(500).send('Database error');
     }
 });
-
+app.get('/api/golfstat/:round', async (req, res) => {
+    const {round} = req.params;
+    try{
+        const result = await pool.query(
+            `SELECT *
+            FROM GolfSTAT
+            WHERE round_number = $1`, 
+            [round]
+        );
+        
+        res.json(result.rows[0]);
+    } catch(err){
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+app.get('/api/golfstat/recent/:name/:round', async (req, res) => {
+    const {name, round} = req.params;
+    try{
+        const result = await pool.query(
+            `SELECT *
+            FROM GolfSTAT
+            WHERE name ILIKE $1 AND
+            round_number = $2`, 
+            [name, round]
+        );
+        
+        res.json(result.rows[0]);
+    } catch(err){
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+app.get('/api/golfstat/rounds/:name', async (req, res) => {
+    const {name} = req.params;
+    try{
+        const result = await pool.query(
+            `SELECT round_number
+            FROM GolfSTAT
+            WHERE name ILIKE $1 
+            ORDER BY round_number
+            LIMIT 2`, 
+            [name]
+        );
+        
+        res.json(result.rows);
+    } catch(err){
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+app.get('/api/golfstat/lowest/:name', async (req, res) => {
+    const {name} = req.params;
+    try{
+        const result = await pool.query(
+            `SELECT min(total_score)
+            as lowest
+            FROM GolfSTAT
+            WHERE name ILIKE $1`, 
+            [name]
+        );
+        
+        res.json(result.rows[0]);
+    } catch(err){
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 app.get('/api/holes/yardages/:round/:yardage', async (req, res) => {
     const {round, yardage} = req.params;
     try{

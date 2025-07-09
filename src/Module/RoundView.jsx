@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import '../App.css';
 import PieCircle from '../Components/PieCircle';
 import Driving from '../Sections/Driving';
@@ -48,20 +48,59 @@ const slices = [
     {value:20, color:'tomato', hover:'green'},
 ];
 
-const RoundView = () => {    
+const RoundView = ({round, onClose}) => {    
+
+    const[info, setInfo] = useState([]);
+    const[course, setCourse] = useState([]);
+            
+        useEffect(() => {
+            fetch(`http://localhost:3003/api/golfstat/${round}`)
+            .then(res => res.json())
+            .then(data => setInfo(data))
+            .catch(err => console.error(err));
+        },[]);
+        const courseName = info.course_name;
+        useEffect(() => {
+            fetch(`http://localhost:3003/api/courses/${courseName}`)
+            .then(res => res.json())
+            .then(data => setCourse(data))
+            .catch(err => console.error(err));
+        },[courseName]);
 
     return (
+        
         <div style={{
+            position:"absolute",
+            top:0,
+            zIndex:1000,
             height:"852px",
             width:"393px",
             background:"rgba(255, 255, 255, 0.9)",
             outline: "1px #CACCCD solid",
             justifyContent: "center", 
-            alignItems:"center",
             }}
             >
+            <div onClick = {(e) => e.stopPropagation()}
+                style={{
+                width:"393px", 
+                height:"50px",
+                display:'flex',
+                justifyContent:"flex-end",
+                }}>
+                <button id="close"  
+                    onClick={onClose}
+                    style={{fontSize:12,
+                        padding:"1px",
+                        display:"flex",
+                        justifyContent:"center",
+                        height:"20px",
+                        width:"23px",
+                        margin:"5px 5px 185px 5px",
+                        cursor:'pointer'
+                     }} > x </button>
+            </div>
             <div style={{
-                width:"300px",
+                width:"393x",
                 height:"40px",
                 fontSize: 20,
                 fontFamily: "Avenir Next",
@@ -70,9 +109,9 @@ const RoundView = () => {
                 justifyContent:"center",
                 textAlign:"center",
                 color:"#15192D",
-                margin:"0px 40px 0px 40px",
+                margin:"5px 40px 0px 40px",
                 }} 
-                >Round Number
+                >{course.course_name} #{round}
             </div>
             <div style={{
                 width:"300px",
@@ -80,18 +119,18 @@ const RoundView = () => {
                 display:"flex",
                 justifyContent:"center",
                 margin:"5px 40px 0px 40px",
-                fontSize: 13,
+                fontSize: 12,
                 color:"#15192D",
                 fontWeight:"300",
                 textAlign:"center",
-            }}>Course: Buffalo Creek Country Club </div>
+            }}>STATS</div>
             <div style={{
                 display:"flex",
                 flexDirection:"row",
                 justifyContent:"center",
                 gap:60,
-                padding: 10,
-                margin:"0px 15px 0px 15px",
+                padding:"0px 15px 0px 15px",
+                margin:"0px 15px 30px 15px",
             }}>
                 <div style={{
                     display:"flex",
@@ -99,12 +138,12 @@ const RoundView = () => {
                     textAlign:"left",
                     gap:1,
                 }}>
-                    <div style={textStyle}>Score: 72</div>
-                    <div style={textStyle}>Putts: 32</div>
-                    <div style={textStyle}>Pars: 12</div>
-                    <div style={textStyle}>Birdies: 3</div>
-                    <div style={textStyle}>Bogeys: 4</div>
-                    <div style={textStyle}>Doubles: 0</div>
+                    <div style={textStyle}>Score: {info.total_score}</div>
+                    <div style={textStyle}>Putts: {info.total_putts}</div>
+                    <div style={textStyle}>Pars: n/a</div>
+                    <div style={textStyle}>Birdies: n/a</div>
+                    <div style={textStyle}>Bogeys: n/a</div>
+                    <div style={textStyle}>Doubles: n/a</div>
                 </div>
                 <div style={{
                     display:"flex",
@@ -112,11 +151,11 @@ const RoundView = () => {
                     textAlign:"left",
                     gap:1,
                 }}>
-                    <div style={textStyle}>GIR: 13/18</div>
-                    <div style={textStyle}>FIR:9/14</div>
-                    <div style={textStyle}>Up & down: 50%</div>
-                    <div style={textStyle}>Hazard: 2</div>
-                    <div style={textStyle}>OB: 0</div>
+                    <div style={textStyle}>GIR: {info.total_gir}/18</div>
+                    <div style={textStyle}>FIR: {info.total_fir}/14</div>
+                    <div style={textStyle}>Up & down: {info.total_up_down}</div>
+                    <div style={textStyle}>Hazard: {info.total_hazard}</div>
+                    <div style={textStyle}>OB: {info.total_ob}</div>
                 </div>
             </div>
                 <div style={{margin:"10px 0px 0px",
@@ -133,10 +172,10 @@ const RoundView = () => {
                     ScoreCard
                 </div>
                 <div style={{marigin:"10px 0px 0px 0px"}}>
-                    <Driving/>
+                    <Driving all={false} round={round}/>
                 </div>
                 <div style={{margin:"10px 0px 0px 0px"}}>
-                    <Chart/>
+                    <Chart all={false} round={round}/>
                 </div>
             </div>
 

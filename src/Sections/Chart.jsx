@@ -18,7 +18,7 @@ const chartSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const Chart = ({all = false}) => {
+const Chart = ({all = false, round}) => {
     const value = all;
     return(
         <div style={chartStyle}>
@@ -28,7 +28,7 @@ const Chart = ({all = false}) => {
                 </div>
 
                 <div id="first-row" style={{width:"100%", display:"flex", justifyContent:"center"}}>
-                    <Barchart all={value}/>
+                    <Barchart all={value} round={round}/>
                 </div>
                 <div id="second-row" style={{width:"100%", display:"flex", justifyContent:"center", gap:"18px"}}>
                     <div style={{fontSize:14, color:"#15192D", fontFamily:"Literata"}}>Par 3's </div>

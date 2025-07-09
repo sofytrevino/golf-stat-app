@@ -21,7 +21,7 @@ const drivingSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const Driving = ({all = false}) => {
+const Driving = ({all = false, round}) => {
     const value = all;
     const[average, setAverage] = useState([]);
 
@@ -36,7 +36,7 @@ const Driving = ({all = false}) => {
         }, []);
                                 
         useEffect(() => {
-            fetch('http://localhost:3003/api/holes/driver/1')
+            fetch(`http://localhost:3003/api/holes/driver/${round}`)
             .then(res => res.json())
             .then(data => setAverage(data))
             .catch(err => console.error(err));
