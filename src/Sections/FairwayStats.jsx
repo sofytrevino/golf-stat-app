@@ -19,7 +19,7 @@ const FairwayStatsSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const FairwayStats = () => {
+const FairwayStats = ({user}) => {
     return(
         <div style={FairwayStatsStyle}>
             <div style={FairwayStatsSection}>
@@ -28,9 +28,9 @@ const FairwayStats = () => {
                 </div>
 
                 <div id="first-row" style={{width:"320px", height:"80px", display:"flex", flexDirection:"row", justifyContent:"space-between", margin:"10px 25px 10px 25px"}}>
-                    <Fairwayhit/>
-                    <TopYardage/>
-                    <SGShot/>
+                    <Fairwayhit user={user}/>
+                    <TopYardage user={user}/>
+                    <SGShot user={user}/>
                     
                 </div>
                     

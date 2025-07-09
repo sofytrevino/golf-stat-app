@@ -19,7 +19,7 @@ const yardagesSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const Yardages = () => {
+const Yardages = ({user}) => {
     return(
         <div style={yardagesStyle}>
             <div style={yardagesSection}>
@@ -28,9 +28,9 @@ const Yardages = () => {
                 </div>
 
                 <div id="first-row" style={{width:"100%", display:"flex", flexDirection:"row", justifyContent:"space-between", margin:"10px 0px 0px 0px"}}>
-                    <CircleYar value={140} colorOp={"darkturquoise"}/>
-                    <CircleYar value={120} colorOp={"forestgreen"}/>
-                    <CircleYar value={90} colorOp={"orangered"}/>
+                    <CircleYar value={140} colorOp={"darkturquoise"} user={user}/>
+                    <CircleYar value={120} colorOp={"forestgreen"} user={user}/>
+                    <CircleYar value={90} colorOp={"orangered"} user={user}/>
                 </div>
                     
 

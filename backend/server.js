@@ -100,15 +100,18 @@ app.get('/api/golfstat/fairway/:name', async (req, res) => {
     }
 });
 
-app.get('/api/holes/topyardage/:round', async (req, res) => {
-    const {round} = req.params;
+
+app.get('/api/holes/topyardage/:name', async (req, res) => {
+    const {name} = req.params;
     try{
         const result = await pool.query(
             `SELECT approach_yardage, COUNT(*) AS count 
-            FROM holes WHERE round_number = $1 
+            FROM holes 
+            WHERE round_number IN (
+                    SELECT round_number FROM GolfSTAT WHERE name ILIKE $1)
             GROUP BY approach_yardage 
             ORDER BY count DESC LIMIT 1`, 
-            [round]
+            [name]
         );
         res.json(result.rows[0]);
     } catch(err){
@@ -236,8 +239,8 @@ app.get('/api/golfstat/lowest/:name', async (req, res) => {
         res.status(500).send('Database error');
     }
 });
-app.get('/api/holes/yardages/:round/:yardage', async (req, res) => {
-    const {round, yardage} = req.params;
+app.get('/api/holes/yardages/:name/:yardage', async (req, res) => {
+    const {name, yardage} = req.params;
     try{
         const result = await pool.query(
             `SELECT 
@@ -246,8 +249,9 @@ app.get('/api/holes/yardages/:round/:yardage', async (req, res) => {
                 / COUNT(approach_yardage), 0)
                 AS yard_count
                 FROM holes 
-                WHERE round_number = $1`, 
-            [round, yardage]
+                WHERE round_number IN (
+                    SELECT round_number FROM GolfSTAT WHERE name ILIKE $1)`, 
+            [name, yardage]
         );
         res.json(result.rows[0]);
     } catch(err){
@@ -299,15 +303,17 @@ app.get('/api/holes/parss/:name/', async (req, res) => {
     }
 });
 
-app.get('/api/holes/updown/:round', async (req, res) => {
-    const {round} = req.params;
+app.get('/api/holes/updown/:name', async (req, res) => {
+    const {name} = req.params;
     try{
         const result = await pool.query(
             `SELECT 
                 ROUND(100.0 * COUNT(CASE WHEN up_down = 'yes' THEN 1 END) 
                 / COUNT(up_down), 0) AS up_percent 
                 FROM holes 
-                WHERE round_number = $1`, [round]
+                WHERE round_number IN (
+                    SELECT round_number FROM GolfSTAT WHERE name ILIKE $1)`, 
+            [name]
         );
         res.json(result.rows[0]);
     } catch(err){
@@ -360,11 +366,16 @@ app.get('/api/holes/drivers/:name', async (req, res) => {
     }
 });
 
-app.get('/api/holes/approach/:min/:max/:round', async (req, res) => {
-    const {min, max, round} = req.params;
+app.get('/api/holes/approach/:min/:max/:name', async (req, res) => {
+    const {min, max, name} = req.params;
     try{
         const result = await pool.query(
-            'SELECT ROUND(AVG(proximity),1) AS avg_proximity FROM holes WHERE approach_yardage BETWEEN $1 AND $2 AND round_number = $3', [min, max, round]
+            `SELECT ROUND(AVG(proximity),1) 
+            AS avg_proximity FROM holes 
+            WHERE round_number IN (
+                    SELECT round_number FROM GolfSTAT WHERE name ILIKE $3)
+            AND approach_yardage BETWEEN $1 AND $2`, 
+            [min, max, name]
         );
         res.json(result.rows[0]);
     } catch(err){

@@ -3,16 +3,16 @@ import '../App.css';
 
 
 
-const LowestCi = () => {    
+const LowestCi = ({user}) => {    
 
     const [isHovered, setIsHovered] = useState(false);
     const [info, setInfo] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3003/api/golfstat/lowest/sofia')
+        fetch(`http://localhost:3003/api/golfstat/lowest/${user}`)
         .then(res => res.json())
         .then(data => setInfo(data))
         .catch(err => console.error(err));
-    },[]);
+    },[user]);
     
 
     const handleMouseEnter = () => {

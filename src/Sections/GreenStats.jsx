@@ -19,7 +19,7 @@ const greenStatsSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const GreenStats = () => {
+const GreenStats = ({user}) => {
     return(
         <div style={greenStatsStyle}>
             <div style={greenStatsSection}>
@@ -28,9 +28,9 @@ const GreenStats = () => {
                 </div>
 
                 <div id="first-row" style={{width:"320px", height:"80px", display:"flex", flexDirection:"row", justifyContent:"space-between", margin:"10px 25px 5px 25px"}}>
-                    <AveragePutt/>
-                    <AvGir/>
-                    <MorePutts/>
+                    <AveragePutt user={user}/>
+                    <AvGir user={user}/>
+                    <MorePutts user={user}/>
                 </div>
                     
 

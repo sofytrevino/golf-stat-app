@@ -20,7 +20,7 @@ const aroundSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const AroundGreen = () => {
+const AroundGreen = ({user}) => {
     return(
         <div style={aroundStyle}>
             <div style={aroundSection}>
@@ -30,9 +30,9 @@ const AroundGreen = () => {
 
                 <div id="first-row" style={{width:"300px", justifyContent:"center", margin:"10px 30px 0px 30px"}}>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", gap:5}}>
-                        <UpDown/>
-                        <AvGir/>
-                        <SGShot/>
+                        <UpDown user={user}/>
+                        <AvGir user={user}/>
+                        <SGShot user={user}/>
                     </div>
                 </div>
 

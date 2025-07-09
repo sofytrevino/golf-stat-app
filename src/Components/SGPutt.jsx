@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css';
 
-const SGPutt = () => {    
+const SGPutt = ({user}) => {    
     return (
         <div
             style={{

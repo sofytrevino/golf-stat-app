@@ -3,7 +3,7 @@ import '../App.css';
 import Scores from '../Module/Scores';
 
 
-const AverageScoreCi = () => {    
+const AverageScoreCi = ({user}) => {    
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setClicked] = useState(false);
     const [showScore, setScore] = useState(false)
@@ -22,11 +22,12 @@ const AverageScoreCi = () => {
     const[persona, setPersona] = useState([]);
     
         useEffect(() => {
-            fetch('http://localhost:3003/api/persona/sofia')
+            fetch(`http://localhost:3003/api/persona/${user}`)
             .then(res => res.json())
             .then(data => setPersona(data))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
+        console.log("score user: ", user);
 
     return (
         <div

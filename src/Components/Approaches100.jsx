@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 
-const Approaches100 = () => {  
+const Approaches100 = ({user}) => {  
     
     const[average, setAverage] = useState([]);
                                     
         useEffect(() => {
-            fetch('http://localhost:3003/api/holes/approach/100/115/1')
+            fetch(`http://localhost:3003/api/holes/approach/100/115/${user}`)
             .then(res => res.json())
             .then(data => setAverage(data.avg_proximity))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
     
 
     return (

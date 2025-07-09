@@ -2,16 +2,16 @@ import React, {useState, useEffect} from 'react'
 import '../App.css';
 import TriangleCircle from './TriangleCircle';
 
-const CircleYar = ({value, colorOp}) => { 
+const CircleYar = ({value, colorOp, user}) => { 
 
     const[average, setAverage] = useState([]);
                                 
         useEffect(() => {
-            fetch(`http://localhost:3003/api/holes/yardages/1/${value}/`)
+            fetch(`http://localhost:3003/api/holes/yardages/${user}/${value}/`)
             .then(res => res.json())
             .then(data => setAverage(data))
             .catch(err => console.error(err));
-        },[value]);
+        },[user, value]);
         console.log("yardage count: ", average.yard_count)
 
     return (

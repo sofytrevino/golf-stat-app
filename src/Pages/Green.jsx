@@ -21,19 +21,19 @@ const greenContentStyle = {
 };
 
 
-const Green = () => {
+const Green = ({user}) => {
     return(
         <div style={layoutStyle}>
             <div style={greenContentStyle}>
                 <div style={{ width:"100px", height: "100px"}}>
                     <div id="first-section" style={{ margin:"0px 0px 20px 0px", justifyContent:"center"}}>
-                        <Putting/>
+                        <Putting user={user}/>
                     </div>
                     <div id="second-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <Approach/>
+                        <Approach user={user}/>
                     </div>
                     <div id="fourth-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <AroundGreen/>
+                        <AroundGreen user={user}/>
                     </div>
                     
                 

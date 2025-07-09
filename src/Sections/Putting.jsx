@@ -20,7 +20,7 @@ const puttSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const Putting = () => {
+const Putting = ({user}) => {
     return(
         <div style={puttStyle}>
             <div style={puttSection}>
@@ -30,9 +30,9 @@ const Putting = () => {
 
                 <div id="first-row" style={{width:"300px", justifyContent:"center", margin:"10px 30px 0px 30px"}}>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", gap:5}}>
-                        <AveragePutt/>
-                        <MorePutts/>
-                        <SGPutt/>
+                        <AveragePutt user={user}/>
+                        <MorePutts  user={user}/>
+                        <SGPutt  user={user}/>
                     </div>
                 </div>
 

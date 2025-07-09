@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 
-const MorePutts = () => {  
+const MorePutts = ({user}) => {  
     
     const[average, setAverage] = useState([]);
                 
         useEffect(() => {
-            fetch('http://localhost:3003/api/golfstat/putt3/sofia')
+            fetch(`http://localhost:3003/api/golfstat/putt3/${user}`)
             .then(res => res.json())
             .then(data => setAverage(data.average_3))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
 
     return (
         <div

@@ -2,16 +2,16 @@ import React, {useEffect, useState} from 'react'
 import '../App.css';
 
 
-const AvGir = () => {    
+const AvGir = ({user}) => {    
 
     const[average, setAverage] = useState([]);
             
         useEffect(() => {
-            fetch('http://localhost:3003/api/golfstat/gir/sofia')
+            fetch(`http://localhost:3003/api/golfstat/gir/${user}`)
             .then(res => res.json())
             .then(data => setAverage(data.average_gir))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
 
 
     return (

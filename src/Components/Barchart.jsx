@@ -3,18 +3,18 @@ import '../App.css';
 
 
 
-const Barchart = ({all = false, round}) => {  
+const Barchart = ({all = false, round, user}) => {  
     const value = all;
     const[par, setPar] = useState([]);
         
         useEffect(() => {
             if(value){
-                fetch(`http://localhost:3003/api/holes/parss/sofia`)
+                fetch(`http://localhost:3003/api/holes/parss/${user}`)
                 .then(res => res.json())
                 .then(data => setPar(data))
                 .catch(err => console.error(err));
             }
-        },[]);
+        },[user]);
 
         useEffect(() => {
             fetch(`http://localhost:3003/api/holes/pars/${round}`)

@@ -21,19 +21,19 @@ const drivingSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const Driving = ({all = false, round}) => {
+const Driving = ({all = false, round, user}) => {
     const value = all;
     const[average, setAverage] = useState([]);
 
         useEffect(() => {
             if(value){
-                fetch('http://localhost:3003/api/holes/drivers/sofia')
+                fetch(`http://localhost:3003/api/holes/drivers/${user}`)
                 .then(res => res.json())
                 .then(data => setAverage(data))
                 .catch(err => console.error(err));
             }
             
-        }, []);
+        }, [user]);
                                 
         useEffect(() => {
             fetch(`http://localhost:3003/api/holes/driver/${round}`)

@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 
-const UpDown = () => {  
+const UpDown = ({user}) => {  
     
     const[average, setAverage] = useState([]);
                                         
         useEffect(() => {
-            fetch('http://localhost:3003/api/holes/updown/1')
+            fetch(`http://localhost:3003/api/holes/updown/${user}`)
             .then(res => res.json())
             .then(data => setAverage(data.up_percent))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
 
     return (
         <div

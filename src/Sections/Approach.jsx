@@ -22,7 +22,7 @@ const approachSection = {
     padding:"20px 10px 10px 10px"
 }
 
-const Approach = () => {
+const Approach = ({user}) => {
     return(
         <div style={approachStyle}>
             <div style={approachSection}>
@@ -36,9 +36,9 @@ const Approach = () => {
                 </div>
 
                 <div style={{display:"flex", flexDirection:"column", gap:12, margin:"10px 0px 10px 0px"}}>
-                    <Approaches200/>
-                    <Approaches150/>
-                    <Approaches100/>
+                    <Approaches200  user={user}/>
+                    <Approaches150  user={user}/>
+                    <Approaches100  user={user}/>
                 </div>
 
                     

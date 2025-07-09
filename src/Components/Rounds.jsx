@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import RoundView from '../Module/RoundView';
 import '../App.css';
 
-const Rounds = ({number = 1, colors}) => {    
+const Rounds = ({number = 1, colors, user}) => {    
     const round = number;
 
     const [isClicked, setClick] = useState(false);
@@ -21,11 +21,11 @@ const Rounds = ({number = 1, colors}) => {
     const[course, setCourse] = useState([]);
                 
         useEffect(() => {
-            fetch(`http://localhost:3003/api/golfstat/recent/sofia/${round}`)
+            fetch(`http://localhost:3003/api/golfstat/recent/${user}/${round}`)
             .then(res => res.json())
             .then(data => setStat(data))
             .catch(err => console.error(err));
-        },[round]);
+        },[user,round]);
         const courseName = stat.course_name;
         useEffect(() => {
             fetch(`http://localhost:3003/api/courses/${courseName}`)

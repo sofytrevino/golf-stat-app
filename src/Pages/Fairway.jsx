@@ -22,22 +22,22 @@ const fairwayContentStyle = {
 };
 
 
-const Fairway = () => {
+const Fairway = ({user}) => {
     return(
         <div style={layoutStyle}>
             <div style={fairwayContentStyle}>
                 <div style={{ width:"100px", height: "100px"}}>
                     <div id="first-section" style={{ margin:"0px 0px 20px 0px", justifyContent:"center"}}>
-                        <Driving all={true}/>
+                        <Driving all={true} user={user}/>
                     </div>
                     <div id="second-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <AveragesRound/>
+                        <AveragesRound  user={user}/>
                     </div>
                     <div id="fourth-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <Yardages/>
+                        <Yardages  user={user}/>
                     </div>
                     <div id="fourth-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <Chart all={true}/>
+                        <Chart all={true}  user={user}/>
                     </div>
                     
                 

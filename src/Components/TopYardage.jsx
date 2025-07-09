@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 
-const TopYardage = () => {  
+const TopYardage = ({user}) => {  
     
     const[average, setAverage] = useState([]);
                         
         useEffect(() => {
-            fetch('http://localhost:3003/api/holes/topyardage/1')
+            fetch(`http://localhost:3003/api/holes/topyardage/${user}`)
             .then(res => res.json())
             .then(data => setAverage(data.approach_yardage))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
     
 
     return (

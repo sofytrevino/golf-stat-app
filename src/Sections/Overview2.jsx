@@ -21,20 +21,20 @@ const overview2Section = {
     padding:"10px 10px 10px 10px"
 }
 
-const Overview2 = () => {
+const Overview2 = ({user}) => {
     return(
         <div style={overview2Style}>
             <div style={overview2Section}>
                 <div style={{display:"flex", flexDirection:"column"}}>
                     <div id="first-row" style={{display:"flex", flexDirection:"row", gap:"70px", fontWeight:"700", fontSize: 16, fontFamily:"Literata", color:"#15192D", margin:"10px 0px 0px 0px"}}>
                         <div> Your Average Score</div>
-                        <AverageScoreCi/>
+                        <AverageScoreCi user={user}/>
                     </div>
 
                     <div id="second-row" style={{width:"100%", display:"flex",justifyContent:"center", flexDirection:"row", gap:"50px", margin:"30px 10px 0px 10px"}}>
-                        <HandicapCi/>
-                        <LowestCi/>
-                        <SGCi/>
+                        <HandicapCi user={user}/>
+                        <LowestCi user={user}/>
+                        <SGCi user={user}/>
                     </div>
                 </div>
                 

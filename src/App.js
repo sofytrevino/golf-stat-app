@@ -10,12 +10,6 @@ import Title from './Sections/Title';
 import Login from './Module/Login';
 
 
-const pageComponents = {
-    Main: <Main/>,
-    Green: <Green/>,
-    Fairway: <Fairway/>,
-    Login: <Login/>,
-};
 
 
 function App() {
@@ -23,14 +17,20 @@ function App() {
   const [selectedPage, setSelectedPage] = React.useState("Main");
   const [login, setLogin] = React.useState(true);
   const [user, setUser] = React.useState('');
-  
+  const pageComponents = {
+    Main: <Main user={user}/>,
+    Green: <Green user={user}/>,
+    Fairway: <Fairway user={user}/>,
+    Login: <Login/>,
+  };
+
 
     const handleLogin = () =>{
       setLogin(false);
+      console.log("username: ", user);
     }
     const handleInput = (value) => {
       setUser(value)
-      console.log("user name: ", user)
     }
 
     const handlePageSelection = (page) => {

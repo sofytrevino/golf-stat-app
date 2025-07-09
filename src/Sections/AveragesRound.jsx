@@ -21,7 +21,7 @@ const averageSection = {
     padding:"10px 10px 10px 10px"
 }
 
-const AveragesRound = () => {
+const AveragesRound = ({user}) => {
     return(
         <div style={averageStyle}>
             <div style={averageSection}>
@@ -30,10 +30,10 @@ const AveragesRound = () => {
                 </div>
 
                 <div id="first-row" style={{width:"100%", display:"flex", flexDirection:"row", justifyContent:"space-between", margin:"10px 0px 0px 0px"}}>
-                    <Fairwayhit/>
-                    <Bunker/>
-                    <Hazard/>
-                    <Ob/>
+                    <Fairwayhit  user={user}/>
+                    <Bunker  user={user}/>
+                    <Hazard  user={user}/>
+                    <Ob  user={user}/>
                 </div>
                     
 

@@ -28,7 +28,7 @@ const mainContentStyle = {
 
 
 
-const Main = () => {
+const Main = ({user}) => {
 
  
     return(
@@ -36,16 +36,16 @@ const Main = () => {
             <div style={mainContentStyle}>
                 <div>
                     <div id="first-section" style={{margin:"0px 0px 20px 0px"}}>
-                        <Overview2/>
+                        <Overview2 user={user}/>
                     </div>
                     <div id="second-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <RecentRounds/>
+                        <RecentRounds user={user}/>
                     </div>
                     <div id="third-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <GreenStats/>
+                        <GreenStats user={user}/>
                     </div>
                     <div id="fourth-section" style={{margin:"20px 0px 20px 0px"}}>
-                        <FairwayStats/>
+                        <FairwayStats user={user}/>
                     </div>
                 </div>
             </div>

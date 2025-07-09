@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 
-const Ob = () => { 
+const Ob = ({user}) => { 
     
     const[count, setCount] = useState([]);
             
         useEffect(() => {
-            fetch(`http://localhost:3003/api/golfstat/ob/sofia`)
+            fetch(`http://localhost:3003/api/golfstat/ob/${user}`)
             .then(res => res.json())
             .then(data => setCount(data.total))
             .catch(err => console.error(err));
-        },[]);
+        },[user]);
 
     return (
         <div
