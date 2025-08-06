@@ -6,13 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const pool = new Pool({
-   host: 'localhost',
-   user: 'postgres',
-   password: 'sofia',
-   database: 'golfstat',
-   port: 5432,
-});
+const pool = require('../db');
 
 app.get('/api/courses/:name', async (req, res) => {
     const {name} = req.params;
