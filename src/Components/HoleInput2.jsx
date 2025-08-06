@@ -88,7 +88,7 @@ const HoleInput2 = ({hole, user, reset}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div style={{display:"flex", width:"100%", height:"25px", justifyContent:"center", margin:"0px 0px 25px 0px"}}>
-                <div style={{display:"inline-block", textSize:15, color:" #000000", fontweight:300, fontFamily: "Tahoma",}}>
+                <div style={{display:"inline-block", textSize:13, color:" #000000", fontweight:300, fontFamily: "Tahoma",}}>
                     Hole {hole_num}
                 </div>
             </div>

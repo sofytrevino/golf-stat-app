@@ -8,6 +8,8 @@ import RoundView from './Module/RoundView';
 import Navigation from './Sections/Navigation';
 import Title from './Sections/Title';
 import Login from './Module/Login';
+import RoundInput from "./Pages/RoundInput";
+
 
 
 
@@ -22,6 +24,7 @@ function App() {
     Green: <Green user={user}/>,
     Fairway: <Fairway user={user}/>,
     Login: <Login/>,
+    RoundInput: <RoundInput/>,
   };
 
 

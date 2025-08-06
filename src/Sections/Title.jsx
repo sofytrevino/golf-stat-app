@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import Button from "@mui/material/Button";
+import AddIcon from '@mui/icons-material/Add';
 import '../App.css';
 
 
@@ -25,12 +27,20 @@ const titleStyle = {
     outline: "1px #CACCCD solid",
 }
 
-const titleSection = {
+const headerSection = {
     height:"90px",
     width: "365px",
     padding:"5px 5px 5px 5px",
     display:"flex",
     flexDirection:"column",
+}
+const TitleSection ={
+    display:"flex",
+    flexDirection:"row",
+    gap:40,
+    justifyContent:"center",
+    margin:"5px 5px 0px 135px",
+
 }
 
 const Title = ({handlePageSelection}) => {
@@ -75,17 +85,27 @@ const Title = ({handlePageSelection}) => {
 
     return(
         <div style={titleStyle}>
-            <div style={titleSection}>
-                <div id="name" 
+            <div style={headerSection}>
+                <div style={TitleSection}>
+                    <div id="name" 
                     style={{
                         fontSize:23, 
                         fontFamily:"Literata", 
                         color:"rgb(0, 0, 0)",
                         fontWeight:"800",
-                        marign:"10px, 5px, 10px, 5px",
-                        justifyContent:"center",
                     }}>
                     StatsApp
+                    </div>
+                    <Button variant="contained" sx={{backgroundColor:"#576dd1ff",
+                            color:'#FFFFFF',
+                            '&:hover': {
+                                backgroundColor:"#3d57ccff",
+                            }
+                        }} onClick={() => handleItemClicked("RoundInput")} 
+                        startIcon={<AddIcon />} 
+                    >
+                        Round
+                    </Button>
                 </div>
                 <div id="dropDown" style={{width:"40px", height:"35px", padding:"5px", display:"flex", flexDirection:"row", gap:10}}>
                     <button id="btn" onClick={() => handleClick()} style={{margin:"10px 5px 0px 5px"}}>

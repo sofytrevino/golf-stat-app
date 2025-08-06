@@ -17,8 +17,8 @@ const AveragePutt = ({user}) => {
             style={{
                 width:"85px",
                 height:"85px",
-                background:" #FFFFFF",
-                boxShadow: "0px, 2px, 12px, rgba(0,0,0,0.15)",
+                background:" rgba(160, 181, 42, 0.7)",
+                boxShadow: "0px, 2px, 12px, rgba(160,181,42,0.15)",
                 borderRadius: 10,
                 outline: "1px #CACCCD solid",
                 justifyContent: "center",

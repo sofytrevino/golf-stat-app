@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const {Pool} = require('pg');
+//const {Pool} = require('pg');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const pool = require('../db');
+const pool = require('./db');
 
 app.get('/api/courses/:name', async (req, res) => {
     const {name} = req.params;

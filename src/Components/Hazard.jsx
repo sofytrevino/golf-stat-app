@@ -17,8 +17,8 @@ const Hazard = ({user}) => {
             style={{
                 width:"85px",
                 height:"85px",
-                background:" #FFFFFF",
-                boxShadow: "0px, 2px, 12px, rgba(0,0,0,0.15)",
+                background:" rgba(163,64,193,0.7)",
+                boxShadow: "0px, 2px, 12px, rgba(163,64,193,0.15)",
                 borderRadius: 10,
                 outline: "1px #CACCCD solid",
                 justifyContent: "center",
